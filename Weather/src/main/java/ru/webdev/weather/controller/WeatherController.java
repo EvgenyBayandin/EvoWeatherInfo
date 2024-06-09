@@ -12,11 +12,11 @@ public class WeatherController {
     @Autowired
     RestTemplate restTemplate = new RestTemplate();
 
-    @Value("appId")
-    String appId;
+    @Value("${appid}")
+    String appid;
 
     @org.springframework.web.bind.annotation.GetMapping("/weather")
     public Root getWeather(){
-        return restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?lat=55.7522&lon=37.6156&units=metric&appid="+appId, Root.class);
+        return restTemplate.getForObject("https://api.openweathermap.org/data/2.5/weather?lat=55.75&lon=37.61&units=metric&appid=" + appid, Root.class);
     }
 }
