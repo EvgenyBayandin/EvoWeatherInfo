@@ -1,9 +1,7 @@
 Реализовано кеширование на 1 минуту данных, полученных от сервиса погоды
 
 ###
-GET http://localhost:8082/weather?
-    lat=55.7522&
-    lon=37.6156
+GET http://localhost:8082/weather?lat=55.7522&lon=37.6156
 
 responce
 
