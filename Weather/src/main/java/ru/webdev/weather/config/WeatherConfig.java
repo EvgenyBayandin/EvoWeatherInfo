@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class WeatherConfig {
+
     @Bean
     @LoadBalanced
     public RestTemplate getRestTemplate(){
