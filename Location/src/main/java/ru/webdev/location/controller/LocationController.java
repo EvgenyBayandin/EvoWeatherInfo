@@ -17,9 +17,14 @@ public class LocationController {
 
 
     @GetMapping
-    public Optional<Geodata> getLocation(@RequestParam String location){
-        return repository.findByName(location);
+    public Iterable<Geodata> findAll(){
+        return repository.findAll();
     }
+
+//    @GetMapping
+//    public Optional<Geodata> getLocation(@RequestParam String location){
+//        return repository.findByName(location);
+//    }
 
     @GetMapping("/weather")
     public Weather redirectRequestWeather(@RequestParam String location) {
