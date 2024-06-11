@@ -21,7 +21,9 @@ public class PersonController {
 
     @Autowired
     private PersonRepository repository;
-    private RestTemplate restTemplate = new RestTemplate();
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping
     public Iterable<Person> findAll() {

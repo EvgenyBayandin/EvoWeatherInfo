@@ -14,7 +14,9 @@ public class LocationController {
 
     @Autowired
     private LocationRepository repository;
-    private RestTemplate restTemplate = new RestTemplate();
+
+    @Autowired
+    private RestTemplate restTemplate;
 
 
     @GetMapping

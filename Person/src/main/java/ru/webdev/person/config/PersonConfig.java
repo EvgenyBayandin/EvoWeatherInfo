@@ -1,12 +1,12 @@
-package ru.webdev.weather.config;
+package ru.webdev.person.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-@Configuration
-public class WeatherConfig {
+@org.springframework.context.annotation.Configuration
+public class PersonConfig {
+
     @Bean
     @LoadBalanced
     public RestTemplate getRestTemplate(){
