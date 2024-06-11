@@ -4,38 +4,56 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import ru.webdev.location.model.Geodata;
+import ru.webdev.location.model.Location;
 import ru.webdev.location.model.Weather;
-import ru.webdev.location.repository.GeodataRepository;
+import ru.webdev.location.repository.LocationRepository;
 
-@RestController("/location")
+@RestController
+@RequestMapping("/location")
 public class LocationController {
 
     @Autowired
-    private GeodataRepository repository;
+    private LocationRepository repository;
     private RestTemplate restTemplate = new RestTemplate();
 
 
     @GetMapping
-    public Iterable<Geodata> findAll(){
+    public Iterable<Location> findAll(){
         return repository.findAll();
     }
 
-//    @GetMapping
-//    public Optional<Geodata> getLocation(@RequestParam String location){
-//        return repository.findByName(location);
-//    }
+    @GetMapping("/")
+    public Optional<Location> getLocation(@RequestParam String name){
+        return repository.findByName(name);
+    }
 
     @GetMapping("/weather")
     public Weather redirectRequestWeather(@RequestParam String location) {
-        Geodata geodata = repository.findByName(location).get();
-        String url = String.format("http://localhost:8082/weather?lat=%s&lon=%s", geodata.getLat(), geodata.getLon());
+        Location l = repository.findByName(location).get();
+        String url = String.format("http://localhost:8082/weather?lat=%s&lon=%s", l.getLatitude(), l.getLongitude());
         return restTemplate.getForObject(url, Weather.class);
     }
 
     @PostMapping
-    public Geodata save(@RequestBody Geodata geodata){
-        return repository.save(geodata);
+    public Location save(@RequestBody Location location){
+        return repository.save(location);
+    }
+
+    @PutMapping("/")
+    public Location putLocation(@RequestBody Location location,  @RequestParam String name){
+        Location existingLocation = repository.findByName(name).get();
+        existingLocation.setName(location.getName());
+        existingLocation.setLatitude(location.getLatitude());
+        existingLocation.setLongitude(location.getLongitude());
+        Location savedLocation = repository.save(existingLocation);
+        return repository.save(savedLocation);
+    }
+
+    @DeleteMapping("/")
+    public Location deleteLocation(@RequestParam String name){
+        Location existingLocation = repository.findByName(name).get();
+        repository.delete(existingLocation);
+        return existingLocation;
     }
 
 }
