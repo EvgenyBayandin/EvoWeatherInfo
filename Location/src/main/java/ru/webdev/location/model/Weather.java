@@ -1,8 +1,12 @@
 package ru.webdev.location.model;
 
-@lombok.NoArgsConstructor
-@lombok.AllArgsConstructor
-@lombok.Data
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Weather {
     private double temp;
     private double feels_like;
