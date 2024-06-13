@@ -2,6 +2,7 @@ package ru.webdev.person.controller;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,11 +22,15 @@ import ru.webdev.person.repository.PersonRepository;
 @RequestMapping("/person")
 public class PersonController {
 
+    @Value("${location.url}")
+    String locationUrl;
+
     @Autowired
     private PersonRepository repository;
 
     @Autowired
     private RestTemplate restTemplate;
+
 
     @GetMapping
     public Iterable<Person> findAll() {
@@ -67,7 +72,10 @@ public class PersonController {
     public ResponseEntity<Weather> getWeather(@PathVariable int id)  {
        if(repository.existsById(id)) {
            String location = repository.findById(id).get().getLocation();
-           Weather weather = restTemplate.getForObject("http://localhost:8083/location/weather?location=" + location, Weather.class);
+//           Weather weather = restTemplate.getForObject("http://localhost:8083/location/weather?location=" + location, Weather.class);
+           String url = String.format("http://%s/location/weather?location=%s", locationUrl, location);
+           System.out.println(url);
+           Weather weather = restTemplate.getForObject(url, Weather.class);
            return new ResponseEntity<>(weather, HttpStatus.OK);
        }
        return new ResponseEntity(null, HttpStatus.NOT_FOUND);

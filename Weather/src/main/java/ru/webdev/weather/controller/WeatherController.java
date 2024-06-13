@@ -14,9 +14,6 @@ import ru.webdev.weather.model.Root;
 @RestController
 public class WeatherController {
 
-    @Autowired
-    RestTemplate restTemplate = new RestTemplate();
-
     @Value("${appid}")
     String appid;
 
@@ -24,12 +21,16 @@ public class WeatherController {
     String urlWeather;
 
     @Autowired
+    RestTemplate restTemplate;
+
+    @Autowired
     private CacheManager cacheManager;
 
     @GetMapping("/weather")
     public Main getWeather(@RequestParam String lat, @RequestParam String lon){
         String request = String.format("%s?lat=%s&lon=%s&units=metric&appid=%s", urlWeather, lat, lon, appid);
-        return restTemplate.getForObject(request, Root.class).getMain();
+//        return restTemplate.getForObject(request, Root.class).getMain();
+        return new RestTemplate().getForObject(request, Root.class).getMain();
     }
 
 //    @GetMapping("/weather")
