@@ -3,7 +3,9 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Location/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LocationSecond/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Person/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/PersonSecond/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Weather/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/discovery-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
